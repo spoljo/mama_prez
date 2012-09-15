@@ -1,0 +1,7 @@
+== Presence ==
+
+Simple set of scripts , server configurations and datatabase layout to be used
+for tracking users of hackerspace in Zagreb. For now it is only xmpp bot that 
+answers with list of people last seen in the hackerspace.
+
+
