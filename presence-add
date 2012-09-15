@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+use strict;
+
+my $DB_CONNSTR = "DBI:mysql:database=presence;host=10.10.6.2";
+my $DB_USERNAME = "presence";
+my $DB_PASSWORD = "whoishere";
+
+# No user serviceable components inside...
+
+use Data::Dumper;
+use Date::Parse;
+use Date::Format;
+use DBI;
+use DBD::mysql;
+
+my %times;
+
+my $dbh = DBI->connect($DB_CONNSTR, $DB_USERNAME, $DB_PASSWORD, { PrintError => 1 }) or die("Can't connect to the database!");
+
+my $sth_entry = $dbh->prepare("INSERT INTO entry (created_on, mac) VALUES (NOW(), ?)");
+my $sth_mac = $dbh->prepare("INSERT INTO mac (mac) VALUES (?)");
+
+my $mac = join(":", map {
+	sprintf("%02s", $_);
+} split(/:/, $ARGV[0]));
+
+$sth_entry->execute($mac);
+$sth_mac->execute($mac);
+
