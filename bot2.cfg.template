@@ -1,0 +1,9 @@
+[db]
+srv = 127.0.0.1
+usr = username
+pass = password
+db = database
+
+[jab]
+user = user@example.com
+pass = longandcomplexpassword
